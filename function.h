@@ -100,7 +100,7 @@ void data_change(unsigned char * data, int size){
                 times++; 
             }
             check_data_changed = true;
-            pos += strlen(to_str);
+            pos = tmp + strlen(to_str);
         }
         strncpy(real_data, tmp_str.c_str(), tmp_str.length()); 
         pos = 0;
