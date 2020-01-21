@@ -67,13 +67,11 @@ void check_flow(unsigned char * data, int size){
     key2.dst_port = packet->tcp.src_port;
     iter = m.begin();
     if ( (iter = m.find(key)) != m.end()){
-        //packet->tcp.seq = packet->tcp.seq + iter->second;
-        packet->tcp.ack = packet->tcp.ack + iter->second;
+        packet->tcp.ack = htonl(ntohl(packet->tcp.ack) + iter->second);
     }
     iter = m.begin();
     if ( (iter = m.find(key2)) != m.end()){
-        packet->tcp.seq = packet->tcp.seq - iter->second;
-        //packet->tcp.ack = htons(ntohs(packet->tcp.ack) + iter->second);
+        packet->tcp.seq = htonl(ntohl(packet->tcp.seq) - iter->second);
     }
 }
 
